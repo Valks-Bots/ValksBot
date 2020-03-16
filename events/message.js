@@ -45,12 +45,14 @@ module.exports = async (client, message) => {
 	
 	console.log('test')
 	
-	const args = message.content.slice(settings.prefix.length).trim().split(/ +/g)
+	const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g)
 	const command = args.shift().toLowerCase()
 	
 	const cmd = client.commands.get(command)
 	
 	if (!cmd) return
+	
+	console.log(cmd)
 	
 	if (cmd && !message.guild && cmd.conf.guildOnly)
 		return client.embed({desc: 'This command is unavailable via private messages. Please run this command in a guild.'})
