@@ -17,11 +17,15 @@ module.exports = (client) => {
 		})
 	}
 	
-	client.loadEvent = (event) => {
-		const eventName = event.split('.')[0]
-		const evt = require(`../events/${event}`)
-		client.on(eventName, evt.bind(null, client))
-		client.logger.log(`Registered Event: ${eventName}`)
+	client.registerEvents = (eventFiles) => {
+		client.logger.log(`Loading a total of ${eventFiles.length} events.`)
+		
+		eventFiles.forEach(file => {
+			const eventName = file.split('.')[0]
+			const evt = require(`../events/${file}`)
+			client.on(eventName, evt.bind(null, client))
+			client.logger.log(`Registered Event: ${eventName}`)
+		})
 	}
 	
 	client.embed = ({msg, title, desc, fields, thumbnail, image}) => {

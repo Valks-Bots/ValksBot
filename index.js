@@ -22,10 +22,9 @@ const init = async () => {
 	client.registerCommands(cmdFiles)
 	
 	const eventFiles = await readdir('./events/')
-	client.logger.log(`Loading a total of ${eventFiles.length} events.`)
-	eventFiles.forEach(file => {
-		client.loadEvent(file)
-	})
+	client.registerEvents(eventFiles)
+	
+	require('axios').get('https://srhpyqt94yxb.statuspage.io/api/v2/status.json').then(({ data }) => client.logger.log(`Discord API Status: ${data.status.description}`))
 	
 	client.login(process.env.BOT_TOKEN)
 }
