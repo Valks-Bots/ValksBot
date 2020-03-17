@@ -3,7 +3,8 @@ module.exports = (client) => {
 		'prefix': 'v!'
 	}
 	
-	client.registerCommands = (cmdFiles) => {
+	client.registerCommands = async () => {
+		const cmdFiles = await readdir('./commands/')
 		client.logger.log(`Loading a total of ${cmdFiles.length} commands.`)
 		
 		cmdFiles.forEach(file => {
@@ -27,44 +28,16 @@ module.exports = (client) => {
 			client.logger.log(`Registered Event: ${eventName}`)
 		})
 	}
-	
-	client.embed = (message, {title, desc, fields, thumbnail, image, color}) => {
-		return {
-			embed: {
-				title: title,
-				description: Array.isArray(desc) ? desc.join('\n') : desc,
-				footer: {
-					text: `Executor: ${message.author.tag} (${message.author.id})`,
-					icon_url: message.author.avatarURL()
-				},
-				thumbnail: {
-					url: thumbnail
-				},
-				image: {
-					url: image
-				},
-				color: color,
-				timestamp: new Date(),
-				fields: fields
-			}
-		}
-	}
-
-	client.error = (message, error, reason = '') => {
-		return client.embed(message, {
-			desc: [reason, `\`\`\`js`, `${error.name}: ${error.message}`, `\`\`\``]
-		})
-	}
 
 	client.find = (message, args, type = 'member') => {
 		const guild = message.guild
 
 		switch (type) {
 			case 'member': {
-				return guild.members.cache.find(member => [member.displayName, member.id].includes(args.slice(1).join(' ')))
+				return guild.members.cache.find(member => [member.displayName, member.id].includes(Array.isArray(args) ? args.slice(1).join(' ') : args))
 			}
 			case 'emoji': {
-				return guild.emojis.cache.find(emoji => [emoji.name, emoji.id].includes(args.slice(1).join(' ')))
+				return guild.emojis.cache.find(emoji => [emoji.name, emoji.id].includes(Array.isArray(args) ? args.slice(1).join(' '): args))
 			}
 		}
 	}
@@ -75,7 +48,6 @@ module.exports = (client) => {
 
 	client.reactDelete = async (message, msg) => {
 		const emoteDelete = client.config.emojis.delete
-		console.log(msg.deleted)
 		await client.customReact(msg, emoteDelete)
 
 		const filter = (reaction, user) => {

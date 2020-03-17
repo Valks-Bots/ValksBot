@@ -1,4 +1,5 @@
 const config = {
+	'statusURL': 'https://srhpyqt94yxb.statuspage.io/api/v2/status.json',
 	'ownerID': '453640548985602048',
 	'botGuildID': '689327932799451186',
 	'moderators': [],

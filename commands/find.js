@@ -1,5 +1,3 @@
-const Embed = require('../classes/embed.js')
-
 exports.run = async (client, message, args) => {
     if (args.length < 2)
         return message.channel.send(client.embed(message, {desc: 'Usage: \`find [emoji]\`'}))
@@ -8,24 +6,22 @@ exports.run = async (client, message, args) => {
         case 'emoji': {
             const emoji = client.find(message, args, 'emoji')
 
-            const embed = new Embed(message, {
-                desc: emoji.identifier,
-                thumbnail: emoji.url
-            })
-
-            const msg = await embed.send()
-            console.log(msg.deleted)
-            //await client.reactDelete(message, msg)
+            if (!emoji) {
+                const msg = await client.embed.debug(message, 'Make sure you spelt the emoji correctly. The emoji has to be from the guild your executing the command in.')
+                client.react.trash(client, message, msg)
+            } else {
+                const msg = await client.embed.send(message, {
+                    desc: emoji.identifier,
+                    thumbnail: emoji.url
+                })
+    
+                client.reactDelete(message, msg)
+            }
 
             return
         }
         case 'member': {
             const member = client.find(message, args, 'member')
-
-            if (!member)
-                return message.channel.send(client.embed(message, {
-                    desc: `Could not find member ${args[1]}.`
-                }))
 
             let roles = []
             member.roles.cache.forEach(role => {
