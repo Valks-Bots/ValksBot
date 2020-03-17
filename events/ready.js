@@ -1,3 +1,3 @@
 module.exports = async client => {
-	client.logger.log(`Playing with ${client.users.cache.size} users in ${client.guilds.cache.size} servers.`)
+	client.logger.ready(`${client.user.username} is ready playing with ${client.users.cache.size} users in ${client.guilds.cache.size} servers.`)
 }

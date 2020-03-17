@@ -14,5 +14,19 @@ exports.log = (content, type = 'log') => {
 		case 'error': {
 			return console.log(chalk.redBright(format))
 		}
+		case 'cmd': {
+			return console.log(chalk.white(format))
+		}
+		case 'ready': {
+			return console.log(chalk.greenBright(format))
+		}
 	}
 }
+
+exports.error = (...args) => this.log(...args, 'error')
+
+exports.warn = (...args) => this.log(...args, 'warn')
+
+exports.cmd = (...args) => this.log(...args, 'cmd')
+
+exports.ready = (...args) => this.log(...args, 'ready')

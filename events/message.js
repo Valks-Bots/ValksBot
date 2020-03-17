@@ -3,10 +3,9 @@ module.exports = async (client, message) => {
 
 	const prefixMention = new RegExp(`^<@!?${client.user.id}>( |)$`)
 	if (message.content.match(prefixMention)) {
-		return client.embed({
+		return message.channel.send(client.embed(message, {
 			title: `${client.user.username} Bot`,
 			desc: [`This bot was designed to make your life easier on several different levels!`, ``, `Get started with \`${client.config.prefix}help\``],
-			msg: message,
 			thumbnail: client.user.avatarURL(),
 			fields: [{
 				name: 'Library',
@@ -38,25 +37,24 @@ module.exports = async (client, message) => {
 				value: '[PayPal](https://www.paypal.com/paypalme2/valkyrienyanko)',
 				inline: true
 			}]
-		})
+		}))
 	}
 	
 	if (!message.content.startsWith(client.config.prefix)) return
 	
-	console.log('test')
-	
-	const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g)
-	const command = args.shift().toLowerCase()
-	
+	const command = message.content.split(' ')[0].slice(client.config.prefix.length)
+	const args = message.content.split(' ').slice(1)
 	const cmd = client.commands.get(command)
 	
 	if (!cmd) return
 	
-	console.log(cmd)
-	
 	if (cmd && !message.guild && cmd.conf.guildOnly)
-		return client.embed({desc: 'This command is unavailable via private messages. Please run this command in a guild.'})
+		return msg.channel.send(client.embed(message, {desc: 'This command is unavailable via private messages. Please run this command in a guild.'}))
 	
-	client.logger.log('command')
+	client.logger.cmd(command)
+
 	cmd.run(client, message, args)
+
+	if (!message.deleted)
+		message.delete()
 }
