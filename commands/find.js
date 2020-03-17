@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
             return
         }
         case 'member': {
-            const member = message.guild.members.cache.find(member => member.user.username === args[1])
+            const member = message.guild.members.cache.find(member => [member.displayName, member.id].includes(args.slice(1).join(' ')))
 
             if (!member)
                 return message.channel.send(client.embed(message, {
@@ -35,10 +35,22 @@ exports.run = async (client, message, args) => {
             })
 
             const msg = await message.channel.send(client.embed(message, {
-                desc: `${member.user.tag} (${member.user.id})`,
-                fields: [{
+                desc: `${member.id}`,
+                fields: [
+                {
+                    name: 'Tag',
+                    value: member.user.tag,
+                    inline: true
+                },
+                {
+                    name: 'Nickname',
+                    value: member.nickname,
+                    inline: true
+                },
+                {
                     name: 'Roles',
-                    value: roles.join(' ')
+                    value: roles.join(' '),
+                    inline: false
                 }],
                 thumbnail: member.user.avatarURL()
             }))
