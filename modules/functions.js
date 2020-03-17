@@ -50,12 +50,32 @@ module.exports = (client) => {
 		}
 	}
 
+	client.error = (message, error, reason = '') => {
+		return client.embed(message, {
+			desc: [reason, `\`\`\`js`, `${error.name}: ${error.message}`, `\`\`\``]
+		})
+	}
+
+	client.find = (message, args, type = 'member') => {
+		const guild = message.guild
+
+		switch (type) {
+			case 'member': {
+				return guild.members.cache.find(member => [member.displayName, member.id].includes(args.slice(1).join(' ')))
+			}
+			case 'emoji': {
+				return guild.emojis.cache.find(emoji => [emoji.name, emoji.id].includes(args.slice(1).join(' ')))
+			}
+		}
+	}
+
 	client.customReact = (message, emojiID) => {
-		message.react(client.guilds.cache.get(client.config.botGuildID).emojis.cache.get(emojiID))
+		message.react(client.guilds.cache.get(client.config.botGuildID).emojis.cache.get(emojiID)).catch(console.error)
 	}
 
 	client.reactDelete = async (message, msg) => {
 		const emoteDelete = client.config.emojis.delete
+		console.log(msg.deleted)
 		await client.customReact(msg, emoteDelete)
 
 		const filter = (reaction, user) => {

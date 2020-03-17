@@ -18,7 +18,7 @@ exports.log = (content, type = 'log') => {
 			return console.log(chalk.white(format))
 		}
 		case 'ready': {
-			return console.log(chalk.greenBright(format))
+			return console.log(chalk.rgb(150, 255, 150)(format))
 		}
 	}
 }

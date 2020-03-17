@@ -1,27 +1,26 @@
+const Embed = require('../classes/embed.js')
+
 exports.run = async (client, message, args) => {
     if (args.length < 2)
         return message.channel.send(client.embed(message, {desc: 'Usage: \`find [emoji]\`'}))
 
     switch(args[0]) {
         case 'emoji': {
-            const emoji = message.guild.emojis.cache.find(emoji => emoji.name === args[1])
+            const emoji = client.find(message, args, 'emoji')
 
-            if (!emoji)
-                return message.channel.send(client.embed(message, {
-                    desc: `Could not find emoji ${args[1]}.`
-                }))
-
-            const msg = await message.channel.send(client.embed(message, {
+            const embed = new Embed(message, {
                 desc: emoji.identifier,
                 thumbnail: emoji.url
-            }))
+            })
 
-            client.reactDelete(message, msg)
+            const msg = await embed.send()
+            console.log(msg.deleted)
+            //await client.reactDelete(message, msg)
 
             return
         }
         case 'member': {
-            const member = message.guild.members.cache.find(member => [member.displayName, member.id].includes(args.slice(1).join(' ')))
+            const member = client.find(message, args, 'member')
 
             if (!member)
                 return message.channel.send(client.embed(message, {
