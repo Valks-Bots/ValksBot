@@ -2,11 +2,16 @@ exports.normal = () => {
 
 }
 
-exports.custom = (client, message, emojiID) => {
-    message.react(client.guilds.cache.get(client.config.botGuildID).emojis.cache.get(emojiID)).catch(console.error)
+exports.custom = (client, msg, emojiID) => {
+    msg.react(client.guilds.cache.get(client.config.botGuildID).emojis.cache.get(emojiID)).catch(console.error)
+}
+
+exports.guild = (message, msg, emojiID) => {
+    msg.react(message.guild.emojis.cache.get(emojiID))
 }
 
 exports.trash = (client, message, msg) => {
+    console.log(message.content)
     const emoteDelete = client.config.emojis.delete
     this.custom(client, msg, emoteDelete)
 
@@ -20,6 +25,8 @@ exports.trash = (client, message, msg) => {
             message.delete()
         if (!msg.deleted)
             msg.delete()
+        
+        collector.stop()
     })
     collector.on('end', (reaction, reactionCollector) => {
         if (!msg.deleted)

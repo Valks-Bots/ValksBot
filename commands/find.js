@@ -1,35 +1,40 @@
 exports.run = async (client, message, args) => {
     if (args.length < 2)
-        return message.channel.send(client.embed(message, {desc: 'Usage: \`find [emoji]\`'}))
+        return client.embed.debug(message, client.commands.get('find').help.usage)
 
     switch(args[0]) {
         case 'emoji': {
             const emoji = client.find(message, args, 'emoji')
 
             if (!emoji) {
-                const msg = await client.embed.debug(message, 'Make sure you spelt the emoji correctly. The emoji has to be from the guild your executing the command in.')
-                client.react.trash(client, message, msg)
-            } else {
-                const msg = await client.embed.send(message, {
-                    desc: emoji.identifier,
-                    thumbnail: emoji.url
-                })
-    
-                client.reactDelete(message, msg)
+                const msg = await client.embed.debug(message, 'Make sure you spelt the emoji correctly. The emoji has to be from the guild your executing the command in. Also case senistive!')
+                return
             }
+
+            const msg = await client.embed.send(message, {
+                desc: emoji.identifier,
+                thumbnail: emoji.url
+            })
 
             return
         }
         case 'member': {
             const member = client.find(message, args, 'member')
 
+            if (!member) {
+                const msg = await client.embed.debug(message, 'Case sensitive!')
+                return
+            }
+
             let roles = []
             member.roles.cache.forEach(role => {
-                if (role.name !== '@everyone')
-                    roles.push(`<@&${role.id}>`)
+                if (role.name === '@everyone' || role.hexColor === '#2f3136')
+                    return
+                
+                roles.push(`<@&${role.id}>`)
             })
 
-            const msg = await message.channel.send(client.embed(message, {
+            const msg = await client.embed.send(message, {
                 desc: `${member.id}`,
                 fields: [
                 {
@@ -39,7 +44,7 @@ exports.run = async (client, message, args) => {
                 },
                 {
                     name: 'Nickname',
-                    value: member.nickname,
+                    value: member.nickname === undefined ? 'No nickname' : member.nickname,
                     inline: true
                 },
                 {
@@ -48,9 +53,7 @@ exports.run = async (client, message, args) => {
                     inline: false
                 }],
                 thumbnail: member.user.avatarURL()
-            }))
-
-            client.reactDelete(message, msg)
+            })
 
             return
         }
@@ -65,5 +68,6 @@ exports.conf = {
 }
 
 exports.help = {
-	name: 'find'
+    name: 'find',
+    usage: '<[emoji | member]> <args>'
 }

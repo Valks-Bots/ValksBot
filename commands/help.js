@@ -1,12 +1,16 @@
 exports.run = async (client, message, args) => {
-    message.channel.send(client.embed(message, {
-        desc: `wip`
-    }))
+	let cmds = []
+	
+	client.commands.forEach(cmd => {
+		cmds.push(`${client.config.prefix}${cmd.help.name} [${cmd.conf.aliases.join(', ')}]`)
+	})
+
+    const msg = await client.embed.debug(message, cmds.join('\n'))
 }
 
 exports.conf = {
 	enabled: true,
-	aliases: ['f'],
+	aliases: ['h'],
 	guildOnly: false,
 	permLevel: 'User'
 }

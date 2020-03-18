@@ -31,13 +31,14 @@ module.exports = (client) => {
 
 	client.find = (message, args, type = 'member') => {
 		const guild = message.guild
+		const params = Array.isArray(args) ? args.slice(1).join(' ') : args
 
 		switch (type) {
 			case 'member': {
-				return guild.members.cache.find(member => [member.displayName, member.id].includes(Array.isArray(args) ? args.slice(1).join(' ') : args))
+				return guild.members.cache.find(member => [member.displayName, member.id].includes(params))
 			}
 			case 'emoji': {
-				return guild.emojis.cache.find(emoji => [emoji.name, emoji.id].includes(Array.isArray(args) ? args.slice(1).join(' '): args))
+				return guild.emojis.cache.find(emoji => [emoji.name, emoji.id].includes(params))
 			}
 		}
 	}

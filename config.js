@@ -4,6 +4,7 @@ const config = {
 	'botGuildID': '689327932799451186',
 	'moderators': [],
 	'prefix': 'v!',
+	'deleteCommands': true,
 	'deleteTime': 30000,
 	'emojis': {
 		'delete': '689328295958806639'
