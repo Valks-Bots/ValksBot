@@ -30,15 +30,19 @@ module.exports = (client) => {
 	}
 
 	client.find = (message, args, type = 'member') => {
+		const guilds = client.guilds.cache
 		const guild = message.guild
 		const params = Array.isArray(args) ? args.slice(1).join(' ') : args
 
-		switch (type) {
-			case 'member': {
-				return guild.members.cache.find(member => [member.displayName, member.id].includes(params))
-			}
-			case 'emoji': {
-				return guild.emojis.cache.find(emoji => [emoji.name, emoji.id].includes(params))
+		if (type === 'member') {
+			return guild.members.cache.find(member => [member.displayName, member.id].includes(params))
+		}
+
+		if (type === 'emoji') {
+			for (const guild of guilds.keyArray()) {
+				const emote = client.guilds.cache.get(guild).emojis.cache.find(emoji => [emoji.name, emoji.id].includes(params))
+				if (emote)
+					return emote
 			}
 		}
 	}
@@ -63,8 +67,7 @@ module.exports = (client) => {
 				msg.delete()
 		})
 		collector.on('end', (reaction, reactionCollector) => {
-			if (!msg.deleted)
-				msg.reactions.removeAll()
+			msg.reactions.removeAll().catch()
 		})
 	}
 }

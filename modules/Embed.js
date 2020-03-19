@@ -21,30 +21,29 @@ exports.create = (message, {title, desc, fields, thumbnail, image, color}) => {
 }
 
 exports.send = async (message, {title, desc, fields, thumbnail, image, color}, react = true) => {
-    const msg = await message.channel.send(this.create(message, { title, desc, fields, thumbnail, image, color }))
-    await react ? message.client.react.trash(message.client, message, msg) : null
-    return msg
+    const m = await message.channel.send(this.create(message, { title, desc, fields, thumbnail, image, color }))
+    await react ? message.client.react.trash(message, m) : null
+    return m
 }
 
-exports.edit = async (message, {title, desc, fields, thumbnail, image, color}) => {
-    message.edit(this.create(message, { title, desc, fields, thumbnail, image, color })).then(msg => {
-        msg.client.react.trash(msg.client, msg, msg)
-        return msg
-    })
+exports.edit = async (message, msg, {title, desc, fields, thumbnail, image, color}) => {
+    const m = await msg.edit(this.create(msg, { title, desc, fields, thumbnail, image, color }))
+    await message.client.react.trash(message, m)
+    return m
 }
 
 exports.debug = async (message, content) => {
-    const msg = await message.channel.send(this.create(message, {
+    const m = await message.channel.send(this.create(message, {
         desc: `\`\`\`${content}\`\`\``
     }))
-    await message.client.react.trash(message.client, message, msg)
-    return msg
+    await message.client.react.trash(message, m)
+    return m
 }
 
 exports.error = async (message, error, content = '') => {
-    const msg = message.channel.send(this.create(message, {
+    const m = await message.channel.send(this.create(message, {
         desc: [content, `\`\`\`js`, `${error.name}: ${error.message}`, `\`\`\``]
     }))
-    await message.client.react.trash(message.client, message, msg)
-    return msg
+    await message.client.react.trash(message, m)
+    return m
 }

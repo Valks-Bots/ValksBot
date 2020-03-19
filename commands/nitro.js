@@ -1,24 +1,24 @@
 exports.run = async (client, message, args) => {
-    if (args.length < 1) {
+    if (args.length < 1)
         return client.embed.debug(message, client.commands.get('nitro').help.usage)
-    }
 
-    if (args[1] === undefined) {
+    if (args[1] === undefined)
         args[1] = 'message'
+
+    const emoji = client.find(message, args[0].replace(/[0-9<>:]/g, ''), 'emoji')
+
+    if (!emoji)
+        return client.embed.debug(message, 'Make sure you spelt the emoji correctly. Also case senistive!')
+
+    if (args[1] === 'message') {
+        return message.channel.send(`<${emoji.animated ? '' : ':'}${emoji.identifier}>`)
     }
 
-    const emoji = client.find(message, args[0], 'emoji')
-
-    switch (args[1]) {
-        case 'message': {
-            return message.channel.send(`<${emoji.identifier}>`)
-        }
-        case 'react': {
-            return message.channel.messages.fetch({limit : 1, before : message.id}).then(messages => {
-                const msg = messages.first()
-                client.react.guild(message, msg, emoji.id)
-            })
-        }
+    if (args[1] === 'react') {
+        return message.channel.messages.fetch({limit : 1, before : message.id}).then(messages => {
+            const msg = messages.first()
+            msg.react(client.guilds.cache.get(emoji.guild.id).emojis.cache.get(emoji.id))
+        })
     }
 }
 
@@ -31,5 +31,6 @@ exports.conf = {
 
 exports.help = {
     name: 'nitro',
-    usage: '<emote> [message | react]'
+    usage: '<emote> [message | react]',
+    description: 'Get any emote that the bot is in and send it as a message or react to a message with it.'
 }

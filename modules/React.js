@@ -10,9 +10,10 @@ exports.guild = (message, msg, emojiID) => {
     msg.react(message.guild.emojis.cache.get(emojiID))
 }
 
-exports.trash = (client, message, msg) => {
-    console.log(message.content)
+exports.trash = (message, msg) => {
+    const client = message.client
     const emoteDelete = client.config.emojis.delete
+
     this.custom(client, msg, emoteDelete)
 
     const filter = (reaction, user) => {
@@ -20,7 +21,7 @@ exports.trash = (client, message, msg) => {
     }
 
     const collector = msg.createReactionCollector(filter, { time: client.config.deleteTime });
-    collector.on('collect', (reaction, reactionCollector) => {
+    collector.on('collect', () => {
         if (!message.deleted)
             message.delete()
         if (!msg.deleted)
@@ -28,8 +29,9 @@ exports.trash = (client, message, msg) => {
         
         collector.stop()
     })
-    collector.on('end', (reaction, reactionCollector) => {
-        if (!msg.deleted)
-            msg.reactions.removeAll()
+    collector.on('end', () => {
+        // !msg.deleted property does not seem to be correct at all times. (must be error on discord.js API end)
+        if (!msg)
+            msg.reactions.removeAll().catch(console.error)
     })
 }

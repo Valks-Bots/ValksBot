@@ -1,17 +1,15 @@
 exports.run = async (client, message, args) => {
     if (args.length < 2)
-        return client.embed.debug(message, client.commands.get('find').help.usage)
+        return await client.embed.debug(message, client.commands.get('find').help.usage)
 
     switch(args[0]) {
         case 'emoji': {
             const emoji = client.find(message, args, 'emoji')
 
-            if (!emoji) {
-                const msg = await client.embed.debug(message, 'Make sure you spelt the emoji correctly. The emoji has to be from the guild your executing the command in. Also case senistive!')
-                return
-            }
+            if (!emoji)
+                return client.embed.debug(message, 'Make sure you spelt the emoji correctly. Also case senistive!')
 
-            const msg = await client.embed.send(message, {
+            client.embed.send(message, {
                 desc: emoji.identifier,
                 thumbnail: emoji.url
             })
@@ -21,10 +19,8 @@ exports.run = async (client, message, args) => {
         case 'member': {
             const member = client.find(message, args, 'member')
 
-            if (!member) {
-                const msg = await client.embed.debug(message, 'Case sensitive!')
-                return
-            }
+            if (!member)
+                return client.embed.debug(message, 'Case sensitive!')
 
             let roles = []
             member.roles.cache.forEach(role => {
@@ -34,7 +30,7 @@ exports.run = async (client, message, args) => {
                 roles.push(`<@&${role.id}>`)
             })
 
-            const msg = await client.embed.send(message, {
+            await client.embed.send(message, {
                 desc: `${member.id}`,
                 fields: [
                 {
@@ -49,7 +45,7 @@ exports.run = async (client, message, args) => {
                 },
                 {
                     name: 'Roles',
-                    value: roles.join(' '),
+                    value: roles.length === 0 ? 'No roles' : roles.join(' '),
                     inline: false
                 }],
                 thumbnail: member.user.avatarURL()

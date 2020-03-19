@@ -16,12 +16,12 @@ require('./modules/functions.js')(client)
 
 const init = async () => {
 	console.clear()
-	const loader = client.loader
-	loader.registerModules(client)
-	loader.registerCommands(client)
-	loader.registerEvents(client)
-	loader.checkDiscordStatus(client)
-	client.login(process.env.BOT_TOKEN)
+	const loader = await client.loader
+	await loader.registerModules(client)
+	await loader.registerCommands(client)
+	await loader.registerEvents(client)
+	await loader.checkDiscordStatus(client)
+	await client.login(process.env.BOT_TOKEN)
 }
 
 init()
