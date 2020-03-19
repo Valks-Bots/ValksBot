@@ -6,7 +6,7 @@
 
 ### Commands
 - Ping pong.
-- Send / react with any emote the bot is in.
+- Send / react with any emote from any guild that the bot is in.
 - Search for a emote / member in the guild the command is being executed in. (WIP)
 
 ## To Do
