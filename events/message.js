@@ -52,7 +52,7 @@ module.exports = async (client, message) => {
 		return msg.channel.send(client.embed(message, {desc: 'This command is unavailable via private messages. Please run this command in a guild.'}))
 	
 	const guildName = message.guild.name.replace(/[^a-zA-Z ]/g, "").trim()
-	client.logger.cmd(`${guildName}: ${message.author.tag}: '${client.config.prefix}${command}'`)
+	client.logger.cmd(`${guildName}: ${message.author.tag}: '${message.content}'`)
 
 	cmd.run(client, message, args)
 

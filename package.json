@@ -4,8 +4,7 @@
   "description": "Valks bot.",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon -q .",
-    "dev:git": "git add . && git commit -m Update && git push -u origin master"
+    "dev:server": "nodemon -q ."
   },
   "author": "valkyrienyanko",
   "license": "ISC",
