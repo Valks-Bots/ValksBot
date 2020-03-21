@@ -29,6 +29,7 @@ exports.trash = (message, msg) => {
   })
   collector.on('end', () => {
     // !msg.deleted property does not seem to be correct at all times. (must be error on discord.js API end)
-    if (!msg) { msg.reactions.removeAll().catch(console.error) }
+    // if (!msg) {  }
+    msg.reactions.removeAll().catch()
   })
 }

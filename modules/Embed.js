@@ -1,10 +1,10 @@
-exports.create = (message, { title, desc, fields, thumbnail, image, color }) => {
+exports.create = (message, { title, desc, fields, thumbnail, image, color, files }) => {
   return {
     embed: {
       title: title,
       description: Array.isArray(desc) ? desc.join('\n') : desc,
       footer: {
-        text: `Executor: ${message.author.tag} (${message.author.id})`,
+        text: `${message.author.tag} (${message.author.id}) <${message.content.slice(0, 20)}${message.content.length > 20 ? '...' : ''}>`,
         icon_url: message.author.avatarURL()
       },
       thumbnail: {
@@ -15,19 +15,20 @@ exports.create = (message, { title, desc, fields, thumbnail, image, color }) => 
       },
       color: color,
       timestamp: new Date(),
-      fields: fields
+      fields: fields,
+      files: files
     }
   }
 }
 
-exports.send = async (message, { title, desc, fields, thumbnail, image, color }, react = true) => {
-  const m = await message.channel.send(this.create(message, { title, desc, fields, thumbnail, image, color }))
+exports.send = async (message, { title, desc, fields, thumbnail, image, color, files }, react = true) => {
+  const m = await message.channel.send(this.create(message, { title, desc, fields, thumbnail, image, color, files }))
   if (react) await message.client.react.trash(message, m)
   return m
 }
 
-exports.edit = async (message, msg, { title, desc, fields, thumbnail, image, color }) => {
-  const m = await msg.edit(this.create(msg, { title, desc, fields, thumbnail, image, color }))
+exports.edit = async (message, msg, { title, desc, fields, thumbnail, image, color, files }) => {
+  const m = await msg.edit(this.create(message, { title, desc, fields, thumbnail, image, color, files }))
   await message.client.react.trash(message, m)
   return m
 }

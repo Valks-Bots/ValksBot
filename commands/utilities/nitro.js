@@ -22,7 +22,7 @@ exports.run = async (client, message, args) => {
 exports.conf = {
   enabled: true,
   aliases: ['nitr'],
-  guildOnly: true,
+  guildOnly: false,
   permLevel: 'User'
 }
 
