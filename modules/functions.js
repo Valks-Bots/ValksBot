@@ -1,30 +1,4 @@
 module.exports = (client) => {
-  client.registerCommands = async () => {
-    const cmdFiles = await readdir('./commands/')
-    client.logger.log(`Loading a total of ${cmdFiles.length} commands.`)
-
-    cmdFiles.forEach(file => {
-      const commandName = file.split('.')[0]
-      const props = require(`../commands/${file}`)
-      client.commands.set(props.help.name, props)
-      props.conf.aliases.forEach(alias => {
-        client.aliases.set(alias, props.help.name)
-      })
-      client.logger.log(`Registered Command: ${commandName}`)
-    })
-  }
-
-  client.registerEvents = (eventFiles) => {
-    client.logger.log(`Loading a total of ${eventFiles.length} events.`)
-
-    eventFiles.forEach(file => {
-      const eventName = file.split('.')[0]
-      const evt = require(`../events/${file}`)
-      client.on(eventName, evt.bind(null, client))
-      client.logger.log(`Registered Event: ${eventName}`)
-    })
-  }
-
   client.find = (message, args, type = 'member') => {
     const guilds = client.guilds.cache
     const guild = message.guild
