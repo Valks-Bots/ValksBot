@@ -5,9 +5,12 @@
 - Reacts to every response with a trashcan emote prompting you to delete the message.
 
 ### Commands
-- Ping pong.
-- Send / react with any emote from any guild that the bot is in.
-- Search for a emote / member in the guild the command is being executed in. (WIP)
+- ping
+- help <command> (Get general help or details about a specific command)
+- nitro <emote> [message | react] (Send / react with any emote from any guild that the bot is in)
+- find <member | emoji> <args> (Search for a emote / member in the guild the command is being executed in)
+- kick <member>
+- ban <member>
 
 ## To Do
 ### Core Features
