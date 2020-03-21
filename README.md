@@ -22,5 +22,4 @@
 - In depth purge messages
 - Interactive embed editor aka interactive embed creator along with storage capabilities
 - Partnership message tracker setup
-- Help command expanded so you can do v!help <command>
 - Commands that help you setup so the bot can listen to certain reactions on old messages and do x number of specified actions ranging from sending a message to giving roles
