@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
       if (name === undefined || name === '') { name = 'No name set.' }
 
       let description = cmd.help.description
-      if (description === undefined || description === '') { description = 'No description has been set for this command.' }
+      if (description === undefined || description === '') { description = `No description has been set for this command.\n\nPlease tell \`${client.users.cache.get(client.config.ownerID).tag}\` to add one!` }
 
       let usage = cmd.help.usage
       if (usage === undefined || usage === '') { usage = `${client.config.prefix}${args[0]}` } else { usage = `${client.config.prefix}${args[0]} ${cmd.help.usage}` }
@@ -30,38 +30,40 @@ exports.run = async (client, message, args) => {
       if (enabled === undefined || enabled === '') { enabled = 'No value set.' }
 
       client.embed.send(message, {
+        code: 'js',
+        inline: false,
         desc: description,
         fields: [
           {
             name: 'Name',
-            value: `\`${name}\``,
-            inline: true
-          },
-          {
-            name: 'Usage',
-            value: `\`${usage}\``,
+            value: name,
             inline: true
           },
           {
             name: 'Aliases',
-            value: `\`${aliases}\``,
+            value: aliases,
             inline: true
           },
           {
             name: 'Perm Level',
-            value: `\`${permLevel}\``,
+            value: permLevel,
             inline: true
           },
           {
             name: 'Guild Only',
-            value: `\`${guildOnly}\``,
+            value: guildOnly,
             inline: true
           },
           {
             name: 'Enabled',
-            value: `\`${enabled}\``,
+            value: enabled,
             inline: true
-          }
+          },
+          {
+            name: 'Usage',
+            value: usage,
+            inline: false
+          },
         ]
       })
     }

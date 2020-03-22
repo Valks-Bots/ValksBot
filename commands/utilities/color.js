@@ -12,19 +12,23 @@ exports.run = async (client, message, args) => {
   const color = client.image.color(r, g, b)
 
   client.embed.send(message, {
+    code: true,
     fields: [
       {
-        name: 'RGB',
-        value: `rgb(${r}, ${g}, ${b})\nrgb(${Math.round(r / 255 * 100)}%, ${Math.round(g / 255 * 100)}%, ${Math.round(b / 255 * 100)}%)`,
-        inline: true
+        name: 'Name',
+        value: Utils.hexToColor(color.hex)
       },
       {
         name: 'Hex',
-        value: color.hex,
-        inline: true
-      }],
+        value: color.hex
+      },
+      {
+        name: 'RGB',
+        value: `rgb(${r}, ${g}, ${b})`
+      }
+    ],
     files: [color.attachment],
-    image: 'attachment://color.png'
+    thumbnail: 'attachment://color.png'
   })
 }
 

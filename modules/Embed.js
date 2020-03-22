@@ -1,4 +1,18 @@
-exports.create = (message, { title, desc, fields, thumbnail, image, color, files }) => {
+exports.create = (message, { title, desc, fields, thumbnail, image, color, files, code, inline = true}) => {
+  if ((code != undefined || code) && fields != undefined){
+    for (field of fields) {
+      if (field.code != undefined && !field.code)
+        continue
+      field.value = `\`\`\`${typeof code === 'string' ? code : ''}\n${field.value}\`\`\``
+    }
+  }
+
+  if (inline && fields != undefined) {
+    for (field of fields) {
+      field.inline = true
+    }
+  }
+
   return {
     embed: {
       title: title,
@@ -21,14 +35,14 @@ exports.create = (message, { title, desc, fields, thumbnail, image, color, files
   }
 }
 
-exports.send = async (message, { title, desc, fields, thumbnail, image, color, files }, react = true) => {
-  const m = await message.channel.send(this.create(message, { title, desc, fields, thumbnail, image, color, files }))
+exports.send = async (message, { title, desc, fields, thumbnail, image, color, files, code, inline }, react = true) => {
+  const m = await message.channel.send(this.create(message, { title, desc, fields, thumbnail, image, color, files, code, inline }))
   if (react) await message.client.react.trash(message, m)
   return m
 }
 
-exports.edit = async (message, msg, { title, desc, fields, thumbnail, image, color, files }) => {
-  const m = await msg.edit(this.create(message, { title, desc, fields, thumbnail, image, color, files }))
+exports.edit = async (message, msg, { title, desc, fields, thumbnail, image, color, files, code, inline }) => {
+  const m = await msg.edit(this.create(message, { title, desc, fields, thumbnail, image, color, files, code, inline }))
   await message.client.react.trash(message, m)
   return m
 }

@@ -1,5 +1,5 @@
 exports.run = async (client, message, args) => {
-
+  client.embed.send(message, {desc: 'Banned someone! yay!'})
 }
 
 exports.conf = {

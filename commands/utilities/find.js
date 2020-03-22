@@ -17,15 +17,15 @@ exports.run = async (client, message, args) => {
 
     if (!member) return client.embed.debug(message, 'Case sensitive!')
 
-    const roles = []
+    let roles = []
     member.roles.cache.forEach(role => {
-      if (role.name === '@everyone' || role.hexColor === '#2f3136') { return }
-
-      roles.push(`<@&${role.id}>`)
+      if (role.name === '@everyone' || role.hexColor === '#2f3136') return
+      roles.push(role.name)
     })
 
     await client.embed.send(message, {
-      desc: `${member.id}`,
+      inline: false,
+      code: true,
       fields: [
         {
           name: 'Tag',
@@ -34,15 +34,25 @@ exports.run = async (client, message, args) => {
         },
         {
           name: 'Nickname',
-          value: member.nickname === undefined ? 'No nickname' : member.nickname,
+          value: member.nickname === null ? 'No nickname' : member.nickname,
           inline: true
         },
         {
+          name: 'ID',
+          value: member.id,
+          inline: true
+        },
+        {
+          name: 'Permissions',
+          value: member.permissions.toArray().slice(0, -1).join(', '),
+          inline: false
+        },
+        {
           name: 'Roles',
-          value: roles.length === 0 ? 'No roles' : roles.join(' '),
+          value: roles.length === 0 ? 'No roles' : roles.slice(0, -1).join(', '),
           inline: false
         }],
-      thumbnail: member.user.avatarURL()
+      image: member.user.avatarURL()
     })
   }
 }

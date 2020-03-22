@@ -2,18 +2,37 @@ module.exports = (client) => {
   client.find = (message, args, type = 'member') => {
     const guilds = client.guilds.cache
     const guild = message.guild
-    const params = Array.isArray(args) ? args.slice(1).join(' ') : args
+    const params = Array.isArray(args) ? args.slice(1).join(' ').toLowerCase() : args.toLowerCase()
 
     if (type === 'member') {
-      return guild.members.cache.find(member => [member.displayName, member.id].includes(params))
+      return guild.members.cache.find(member => [member.id, member.displayName.toLowerCase()].includes(params))
+    }
+
+    if (type === 'role') {
+      return guild.roles.cache.find(role => [role.id, role.name.toLowerCase()].includes(params))
     }
 
     if (type === 'emoji') {
       for (const guild of guilds.keyArray()) {
-        const emote = client.guilds.cache.get(guild).emojis.cache.find(emoji => [emoji.name, emoji.id].includes(params))
+        const emote = client.guilds.cache.get(guild).emojis.cache.find(emoji => [emoji.id, emoji.name.toLowerCase()].includes(params))
         if (emote) { return emote }
       }
     }
+  }
+
+  client.permLevel = async (client, message) => {
+    const permLevels = client.config.permLevels.sort((a, b) => b.level - a.level)
+    return new Promise(async (resolve, reject) => {
+      for (const permLevel of permLevels) {
+        await permLevel.check(client, message).then(check => {
+          if (check) {
+            resolve(permLevel.level)
+          }
+        }).catch((e) => {
+          reject(permLevel.level)
+        })
+      }
+    })
   }
 
   client.customReact = (message, emojiID) => {

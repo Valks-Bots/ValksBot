@@ -46,14 +46,40 @@ module.exports = async (client, message) => {
   const args = message.content.split(' ').slice(1)
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command))
 
-  if (!cmd) return
+  // Is this a valid command?
+  if (!cmd || command === '') return
 
-  if (cmd && !message.guild && cmd.conf.guildOnly) return message.channel.send(client.embed(message, { desc: 'This command is unavailable via private messages. Please run this command in a guild.' }))
+  // Delete the executors message.
+  if (client.config.deleteCommands && !message.deleted) message.delete()
 
-  const guildName = message.guild.name.replace(/[^a-zA-Z ]/g, '').trim()
-  client.logger.cmd(`${guildName}: ${message.author.tag}: '${message.content}'`)
+  // Is the command only available in guilds?
+  if (!message.guild && cmd.conf.guildOnly) return client.embed.send(message, { desc: 'This command is unavailable via private messages. Please run this command in a guild.' })
 
-  cmd.run(client, message, args)
+  // Is the bot currently under going maintenence?
+  if (client.config.botMaintenance && message.author.id != client.config.ownerID) return client.embed.send(message, {desc: 'The bot can currently only be run by the bot owner. Sorry for the inconvience.'})
 
-  if (client.config.deleteCommands && !message.deleted) { message.delete() }
+  client.permLevel(client, message).then(permLevel => {
+    if (permLevel >= client.levelCache[cmd.conf.permLevel]) {
+      const guildName = message.guild.name.replace(/[^a-zA-Z ]/g, '').trim()
+      client.logger.cmd(`${guildName}: ${message.author.tag}: '${message.content}'`)
+      cmd.run(client, message, args)
+    } else {
+      client.embed.send(message, {
+        code: true,
+        desc: 'You do not have permission to run this command.',
+        fields: [
+          {
+            name: 'Have',
+            value: client.config.permLevels.find(l => l.level === permLevel).name
+          }, 
+          {
+            name: 'Required',
+            value: cmd.conf.permLevel
+          }
+        ]
+      })
+    }
+  }).catch((e) => {
+    client.embed.debug(message, `Tell ${message.guild.owner.tag} to assign a role for ${client.config.permLevels.find(l => l.level === e).name} in the settings.`)
+  })
 }

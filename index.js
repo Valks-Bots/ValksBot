@@ -2,17 +2,23 @@ if (Number(process.version.slice(1).split('.')[0]) < 8) throw new Error('Node 8.
 
 const Discord = require('discord.js')
 
-// const sql = require('sqlite')
 const client = new Discord.Client()
 
+client.database = require('sqlite')
 client.config = require('./config.js')
 client.loader = require('./modules/Loader')
 
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
+client.levelCache = {}
+for (const permLevel of client.config.permLevels) {
+  client.levelCache[permLevel.name] = permLevel.level
+}
 
 require('dotenv').config()
 require('./modules/functions.js')(client)
+
+client.database.open('./database.db')
 
 const init = async () => {
   console.clear()
