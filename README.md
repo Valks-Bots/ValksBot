@@ -13,8 +13,8 @@
 - find <member | emoji> <args> (Search for a emote / member in the guild the command is being executed in)
 - kick <member>
 - ban <member>
-- color <r> <g> <b>
-- settings <field> [value]
+- `color <r> <g> <b>`
+- `settings <field> [value]`
 
 ## To Do
 ### Commands
