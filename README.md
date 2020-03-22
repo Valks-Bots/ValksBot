@@ -1,25 +1,18 @@
 # Valks Bot
-## Features
-### Core Features
-- Per Guild Settings with SQLite (Local Database) (No python required, it's all JS)
-- Permissions & Aliases
-- Deletes command executors message
-- Reacts to every response with a trashcan emote prompting you to delete the message.
+## About
+Multipurpose Discord bot.
 
-### Commands
-`ping`  
-`help <command> (Get general help or details about a specific command)`  
-`nitro <emote> [message | react] (Send / react with any emote from any guild that the bot is in)`  
-`find <member | emoji> <args> (Search for a emote / member in the guild the command is being executed in)`  
-`kick <member>`  
-`ban <member>`  
-`color <r> <g> <b>`  
-`settings <field> [value]`  
+## Setup
+1. Clone `https://github.com/valkyrienyanko/ValksBot.git`
+2. Download and Install `LTS` [Node.js](https://nodejs.org/en/)
+3. Install Yarn `npm i -g yarn`
+4. Run `yarn install` in the Project Root Directory
+5. Generate a Bot Token from the [Discord Developers Portal](https://discordapp.com/developers/applications/)
+6. Create a `.env` File with Bot Token (`BOT_TOKEN=BotTokenHere`)
+7. Start Server with `yarn dev:server`
+8. Create an Invite Link for the Bot by Grabbing its Token ID and Putting it in the Following URL `https://discordapp.com/api/oauth2/authorize?client_id=ID&scope=bot&permissions=27649`
 
-## To Do
-- Expand the search function to search in all guilds the bot is in.
-- Expand the search function to search for everything including channels, guilds, presences, etc..
-- In depth purge messages
-- Interactive embed editor aka interactive embed creator along with storage capabilities
-- Partnership message tracker setup
-- Commands that help you setup so the bot can listen to certain reactions on old messages and do x number of specified actions ranging from sending a message to giving roles
+## Contributing
+See [CONTRIBUTING.md]().
+
+If you have any questions, send me a message over discord at **valk#3277**.
