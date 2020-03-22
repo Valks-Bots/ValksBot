@@ -13,6 +13,6 @@ Multipurpose Discord bot.
 8. Create an Invite Link for the Bot by Grabbing its Token ID and Putting it in the Following URL `https://discordapp.com/api/oauth2/authorize?client_id=ID&scope=bot&permissions=27649`
 
 ## Contributing
-See [CONTRIBUTING.md]().
+See [CONTRIBUTING.md](https://github.com/valkyrienyanko/ValksBot/blob/master/CONTRIBUTING.md).
 
 If you have any questions, send me a message over discord at **valk#3277**.
