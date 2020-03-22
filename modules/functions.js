@@ -3,18 +3,19 @@ module.exports = (client) => {
     const guilds = client.guilds.cache
     const guild = message.guild
     const params = Array.isArray(args) ? args.slice(1).join(' ').toLowerCase() : args.toLowerCase()
+    const paramsReg = params.replace(/[<!@>]/g, '')
 
     if (type === 'member') {
-      return guild.members.cache.find(member => [member.id, member.displayName.toLowerCase()].includes(params))
+      return guild.members.cache.find(member => [member.id, member.displayName.toLowerCase()].includes(paramsReg))
     }
 
     if (type === 'role') {
-      return guild.roles.cache.find(role => [role.id, role.name.toLowerCase()].includes(params))
+      return guild.roles.cache.find(role => [role.id, role.name.toLowerCase()].includes(paramsReg))
     }
 
     if (type === 'emoji') {
       for (const guild of guilds.keyArray()) {
-        const emote = client.guilds.cache.get(guild).emojis.cache.find(emoji => [emoji.id, emoji.name.toLowerCase()].includes(params))
+        const emote = client.guilds.cache.get(guild).emojis.cache.find(emoji => [emoji.id, emoji.name.toLowerCase()].includes(paramsReg))
         if (emote) { return emote }
       }
     }

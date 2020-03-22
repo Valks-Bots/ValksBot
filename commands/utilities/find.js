@@ -1,3 +1,6 @@
+const prettyMS = require('pretty-ms')
+const dateFormat = require('dateformat')
+
 exports.run = async (client, message, args) => {
   if (args.length < 2) return client.embed.debug(message, client.commands.get('find').help.usage)
 
@@ -23,19 +26,25 @@ exports.run = async (client, message, args) => {
       roles.push(role.name)
     })
 
+    const joinedServerAt = dateFormat(member.joinedAt, 'mmm dS, yyyy, h:MM TT')
+    const memberAge = prettyMS(Date.now() - member.joinedAt.getTime(), { verbose: true, unitCount: 3 })
+    const accountAge = prettyMS(Date.now() - member.user.createdAt.getTime(), { verbose: true, unitCount: 3 })
+
+    const lastMessageContent = member.lastMessage === null ? 'Could not find last sent message.' : `[${member.lastMessage.content}](https://discordapp.com/channels/${member.guild.id}/${member.lastMessageChannelID}/${member.lastMessageID})`
+
     await client.embed.send(message, {
-      inline: false,
       code: true,
+      inline: false,
       fields: [
         {
           name: 'Tag',
           value: member.user.tag,
-          inline: true
+          inline: true,
         },
         {
           name: 'Nickname',
           value: member.nickname === null ? 'No nickname' : member.nickname,
-          inline: true
+          inline: true,
         },
         {
           name: 'ID',
@@ -43,9 +52,31 @@ exports.run = async (client, message, args) => {
           inline: true
         },
         {
+          name: 'Account Age',
+          value: accountAge,
+          inline: true
+        },
+        {
+          name: 'Joined Server At',
+          value: joinedServerAt,
+          inline: true
+        },
+        {
+          name: 'Member Age',
+          value: memberAge,
+          inline: true
+        },
+        {
+          name: 'Last Message',
+          value: lastMessageContent,
+          inline: false,
+          code: false
+        },
+        {
           name: 'Permissions',
           value: member.permissions.toArray().slice(0, -1).join(', '),
-          inline: false
+          inline: false,
+          code: true
         },
         {
           name: 'Roles',
