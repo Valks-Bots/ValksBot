@@ -15,6 +15,8 @@ for (const permLevel of client.config.permLevels) {
   client.levelCache[permLevel.name] = permLevel.level
 }
 
+client.cooldowns = {}
+
 require('dotenv').config()
 require('./modules/functions.js')(client)
 

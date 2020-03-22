@@ -58,6 +58,9 @@ module.exports = async (client, message) => {
   // Is the bot currently under going maintenence?
   if (client.config.botMaintenance && message.author.id != client.config.ownerID) return client.embed.send(message, {desc: 'The bot can currently only be run by the bot owner. Sorry for the inconvience.'})
 
+  // Check command cooldown
+  //client.cooldowns[message.author.id] = ...
+
   client.permLevel(client, message).then(permLevel => {
     if (permLevel >= client.levelCache[cmd.conf.permLevel]) {
       const guildName = message.guild.name.replace(/[^a-zA-Z ]/g, '').trim()
