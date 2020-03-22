@@ -17,7 +17,6 @@
 `settings <field> [value]`  
 
 ## To Do
-### Commands
 - Expand the search function to search in all guilds the bot is in.
 - Expand the search function to search for everything including channels, guilds, presences, etc..
 - In depth purge messages
