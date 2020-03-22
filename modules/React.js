@@ -22,8 +22,8 @@ exports.trash = (message, msg) => {
 
   const collector = msg.createReactionCollector(filter, { time: client.config.deleteTime })
   collector.on('collect', () => {
-    if (!message.deleted) { message.delete() }
-    if (!msg.deleted) { msg.delete() }
+    if (!message.deleted) { message.delete().catch() }
+    if (!msg.deleted) { msg.delete().catch() }
 
     collector.stop()
   })
