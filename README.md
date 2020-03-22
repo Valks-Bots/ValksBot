@@ -1,6 +1,6 @@
 # Valks Bot
 ## About
-Multipurpose Discord bot.
+Multipurpose Discord bot..
 
 ## Setup
 1. Clone `https://github.com/valkyrienyanko/ValksBot.git`
