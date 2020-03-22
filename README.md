@@ -1,6 +1,8 @@
 # Valks Bot
 ## Features
 ### Core Features
+- Per Guild Settings with SQLite (Local Database) (No python required, it's all JS)
+- Permissions & Aliases
 - Deletes command executors message
 - Reacts to every response with a trashcan emote prompting you to delete the message.
 
@@ -11,11 +13,10 @@
 - find <member | emoji> <args> (Search for a emote / member in the guild the command is being executed in)
 - kick <member>
 - ban <member>
+- color <r> <g> <b>
+- settings <field> [value]
 
 ## To Do
-### Core Features
-- Per Guild Settings with SQLite (Local Database) (No python required, it's all JS)
-
 ### Commands
 - Expand the search function to search in all guilds the bot is in.
 - Expand the search function to search for everything including channels, guilds, presences, etc..
