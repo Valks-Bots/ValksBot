@@ -40,6 +40,15 @@ module.exports = async (client, message) => {
     })
   }
 
+  if (!message.guild && !message.content.startsWith(client.config.prefix)) {
+    // Mod Mail
+    client.settings.getAll(client, message).then(row => {
+      if (row['modmail_guild'] != null && row['modmail_category'] != null) {
+        console.log('hooray')
+      }
+    })
+  }
+
   if (!message.content.startsWith(client.config.prefix)) return
 
   const command = message.content.split(' ')[0].slice(client.config.prefix.length)
@@ -83,6 +92,8 @@ module.exports = async (client, message) => {
       })
     }
   }).catch((e) => {
-    client.embed.debug(message, `Tell ${message.guild.owner.tag} to assign a role for ${client.config.permLevels.find(l => l.level === e).name} in the settings.`)
+    if (message.guild) {
+      client.embed.debug(message, `Tell ${message.guild.owner.tag} to assign a role for ${client.config.permLevels.find(l => l.level === e).name} in the settings.`)
+    }
   })
 }

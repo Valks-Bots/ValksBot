@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
           inline: true
         },
         {
-          name: 'Joined Server At',
+          name: 'Member Age',
           value: joinedServerAt,
           inline: true
         },

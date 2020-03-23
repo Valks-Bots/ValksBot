@@ -13,11 +13,19 @@ module.exports = (client) => {
       return guild.roles.cache.find(role => [role.id, role.name.toLowerCase()].includes(paramsReg))
     }
 
+    if (type === 'channel') {
+      return guild.channels.cache.find(channel => [channel.id, channel.name].includes(paramsReg))
+    }
+
     if (type === 'emoji') {
       for (const guild of guilds.keyArray()) {
         const emote = client.guilds.cache.get(guild).emojis.cache.find(emoji => [emoji.id, emoji.name.toLowerCase()].includes(paramsReg))
         if (emote) { return emote }
       }
+    }
+
+    if (type === 'guild') {
+      return client.guilds.cache.find(guild => [guild.id, guild.name].includes(paramsReg))
     }
   }
 
