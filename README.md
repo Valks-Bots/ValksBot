@@ -1,6 +1,6 @@
 # Valks Bot
 ## About
-Multipurpose Discord bot..
+My first modular Discord bot I made without any major outside help.
 
 ## Setup
 1. Clone `https://github.com/valkyrienyanko/ValksBot.git`
