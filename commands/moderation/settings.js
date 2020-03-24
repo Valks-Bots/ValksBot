@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
         if (message.author.id != client.config.ownerID) return client.embed.send(message, {desc: `You need to be the bot owner to update the 'modmail_guild' field.`})
         const guild = client.find(message, args[1], 'guild')
         if (!guild) return client.embed.send(message, {desc: `Could not find guild called '${args[1]}'`})
-        return client.settings.set(client, message, args[0], guild.id)
+        return client.modmail.updateGuild(client, message, guild.id)
     }
 
     if (args[0] === 'modmail_category') {
@@ -47,7 +47,7 @@ exports.run = async (client, message, args) => {
         const channel = client.find(message, args[1], 'channel')
         if (!channel) return client.embed.send(message, {desc: `Could not find channel called '${args[1]}'`})
         if (channel.type != 'category') return client.embed.send(message, {desc: `Channel must be of type 'category'.`})
-        return client.settings.set(client, message, args[0], channel.id)
+        return client.modmail.updateCategory(client, message, message.guild.id, channel.id)
     }
 }
 

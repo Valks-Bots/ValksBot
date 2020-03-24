@@ -2,3 +2,4 @@
 .env
 yarn-error.log
 database.db
+cache.json

@@ -10,6 +10,8 @@ client.loader = require('./modules/Loader')
 
 client.commands = new Discord.Collection()
 client.aliases = new Discord.Collection()
+
+// Cache
 client.levelCache = {}
 for (const permLevel of client.config.permLevels) {
   client.levelCache[permLevel.name] = permLevel.level
@@ -29,6 +31,7 @@ const init = async () => {
   await loader.registerCommands(client)
   await loader.registerEvents(client)
   await loader.checkDiscordStatus(client)
+  await client.cache.init()
   await client.login(process.env.BOT_TOKEN)
 }
 
