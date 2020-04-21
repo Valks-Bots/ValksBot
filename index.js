@@ -24,6 +24,8 @@ require('./modules/functions.js')(client)
 
 client.database.open('./database.db')
 
+process.on('unhandledRejection', up => { throw up })
+
 const init = async () => {
   console.clear()
   const loader = await client.loader

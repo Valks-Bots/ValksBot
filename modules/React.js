@@ -22,14 +22,12 @@ exports.trash = (message, msg) => {
 
   const collector = msg.createReactionCollector(filter, { time: client.config.deleteTime })
   collector.on('collect', () => {
-    if (!message.deleted) { message.delete().catch() }
-    if (!msg.deleted) { msg.delete().catch() }
+    if (!message.deleted) { message.delete().catch(console.error) }
+    if (!msg.deleted) { msg.delete().catch(console.error) }
 
     collector.stop()
   })
   collector.on('end', () => {
-    // !msg.deleted property does not seem to be correct at all times. (must be error on discord.js API end)
-    // if (!msg) {  }
-    msg.reactions.removeAll().catch()
+    if (!msg.deleted) { msg.reactions.removeAll().catch(console.error) }
   })
 }
