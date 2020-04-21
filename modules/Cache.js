@@ -1,8 +1,6 @@
 const fs = require('fs')
 
-exports.data = {
-    guilds: []
-}
+exports.data = {}
 
 exports.save = () => {
     fs.writeFileSync('cache.json', JSON.stringify(this.data, null, 2))

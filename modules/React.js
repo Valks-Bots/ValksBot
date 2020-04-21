@@ -27,6 +27,7 @@ exports.trash = (message, msg) => {
 
     collector.stop()
   })
+  
   collector.on('end', () => {
     if (!msg.deleted) { msg.reactions.removeAll().catch(console.error) }
   })
