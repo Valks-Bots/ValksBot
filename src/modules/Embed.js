@@ -1,8 +1,7 @@
-exports.create = (message, { title, desc, fields, thumbnail, image, color, files, code, inline = true}) => {
-  if ((code != undefined || code) && fields != undefined){
+exports.create = (message, { title, desc, fields, thumbnail, image, color, files, code, inline = true }) => {
+  if ((code != undefined || code) && fields != undefined) {
     for (field of fields) {
-      if (field.code != undefined && !field.code)
-        continue
+      if (field.code != undefined && !field.code) { continue }
       field.value = `\`\`\`${typeof code === 'string' ? code : ''}\n${field.value}\`\`\``
     }
   }

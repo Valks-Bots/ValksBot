@@ -43,7 +43,7 @@ module.exports = async (client, message) => {
   if (!message.guild && !message.content.startsWith(client.config.prefix)) {
     // Mod Mail
     client.settings.getAll(client, message).then(row => {
-      if (row['modmail_guild'] != null && row['modmail_category'] != null) {
+      if (row.modmail_guild != null && row.modmail_category != null) {
         console.log('hooray')
       }
     })
@@ -65,10 +65,10 @@ module.exports = async (client, message) => {
   if (!message.guild && cmd.conf.guildOnly) return client.embed.send(message, { desc: 'This command is unavailable via private messages. Please run this command in a guild.' })
 
   // Is the bot currently under going maintenence?
-  if (client.config.botMaintenance && message.author.id != client.config.ownerID) return client.embed.send(message, {desc: 'The bot can currently only be run by the bot owner. Sorry for the inconvience.'})
+  if (client.config.botMaintenance && message.author.id != client.config.ownerID) return client.embed.send(message, { desc: 'The bot can currently only be run by the bot owner. Sorry for the inconvience.' })
 
   // Check command cooldown
-  //client.cooldowns[message.author.id] = ...
+  // client.cooldowns[message.author.id] = ...
 
   client.permLevel(client, message).then(permLevel => {
     if (permLevel >= client.levelCache[cmd.conf.permLevel]) {
@@ -83,7 +83,7 @@ module.exports = async (client, message) => {
           {
             name: 'Have',
             value: client.config.permLevels.find(l => l.level === permLevel).name
-          }, 
+          },
           {
             name: 'Required',
             value: cmd.conf.permLevel

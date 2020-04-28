@@ -63,7 +63,7 @@ exports.run = async (client, message, args) => {
             name: 'Usage',
             value: usage,
             inline: false
-          },
+          }
         ]
       })
     }

@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
   const memberAge = prettyMS(Date.now() - member.joinedAt.getTime(), { verbose: true, unitCount: 3 })
   const accountAge = prettyMS(Date.now() - member.user.createdAt.getTime(), { verbose: true, unitCount: 3 })
 
-  member.kick(args.length >= 2 ? args.slice(1).join(' ') : 'No reason specified.').then((m => {
+  member.kick(args.length >= 2 ? args.slice(1).join(' ') : 'No reason specified.').then(m => {
     client.embed.send(message, {
       code: true,
       desc: `\`\`\`Kicked ${m.user.tag} (${m.id})\`\`\``,
@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
         }
       ]
     })
-  })).catch((err) => {
+  }).catch((err) => {
     client.embed.debug(message, err)
   })
 }

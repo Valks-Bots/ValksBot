@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
 
     if (!member) return client.embed.debug(message, 'Case sensitive!')
 
-    let roles = []
+    const roles = []
     member.roles.cache.forEach(role => {
       if (role.name === '@everyone' || role.hexColor === '#2f3136') return
       roles.push(role.name)
@@ -39,12 +39,12 @@ exports.run = async (client, message, args) => {
         {
           name: 'Tag',
           value: member.user.tag,
-          inline: true,
+          inline: true
         },
         {
           name: 'Nickname',
           value: member.nickname === null ? 'No nickname' : member.nickname,
-          inline: true,
+          inline: true
         },
         {
           name: 'ID',

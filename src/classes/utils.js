@@ -15,7 +15,7 @@ class Utils {
     return hex.length === 1 ? '0' + hex : hex
   }
 
-  static hexToColor(hex) {
+  static hexToColor (hex) {
     return NTC.name(hex)[1]
   }
 }

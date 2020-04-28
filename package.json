@@ -4,9 +4,8 @@
   "description": "Valks bot.",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon -q .",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "dev:server": "cd src && nodemon -q .",
+    "dev:lint": "cd src && eslint --fix ."
   },
   "author": "valkyrienyanko",
   "license": "ISC",

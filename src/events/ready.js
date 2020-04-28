@@ -15,7 +15,7 @@ module.exports = async client => {
   await client.database.run('CREATE TABLE IF NOT EXISTS modmail (guildid TEXT UNIQUE, category TEXT)')
 
   const modmail = await client.database.get('SELECT * FROM modmail')
-  client.cache.data['modmail'] = modmail
+  client.cache.data.modmail = modmail
 
   client.cache.save()
 }
