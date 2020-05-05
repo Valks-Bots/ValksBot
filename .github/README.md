@@ -1,4 +1,12 @@
-# Valks Bot
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_ValksBot&metric=alert_status)](https://sonarcloud.io/dashboard?id=valkyrienyanko_ValksBot)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_ValksBot&metric=ncloc)](https://sonarcloud.io/dashboard?id=valkyrienyanko_ValksBot)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_ValksBot&metric=bugs)](https://sonarcloud.io/dashboard?id=valkyrienyanko_ValksBot)
+[![GitHub license](https://img.shields.io/github/license/valkyrienyanko/ValksBot?color=brightgreen)](https://github.com/valkyrienyanko/ValksBot/blob/master/LICENSE)
+[![Issues](https://img.shields.io/github/issues/valkyrienyanko/ValksBot)](https://github.com/valkyrienyanko/ValksBot/issues)
+[![Discord](https://img.shields.io/discord/453710350454620160.svg)](https://discordapp.com/invite/N9QVxbM)
+[![GitHub stars](https://img.shields.io/github/stars/valkyrienyanko/ValksBot?color=brightgreen)](https://github.com/valkyrienyanko/ValksBot/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/valkyrienyanko/ValksBot?color=brightgreen)](https://github.com/valkyrienyanko/ValksBot/network)
+
 ## About
 My first modular Discord bot I made without any major outside help.
 
