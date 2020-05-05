@@ -9,7 +9,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/valkyrienyanko/ValksBot?color=brightgreen)](https://github.com/valkyrienyanko/ValksBot/network)
 
 ## About
-My first modular Discord bot I made without any major outside help.
+Multipurpose modular Discord bot.
 
 ## Setup
 1. Clone `https://github.com/valkyrienyanko/ValksBot.git`
