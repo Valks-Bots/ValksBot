@@ -1,3 +1,4 @@
+# ValksBot
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_ValksBot&metric=alert_status)](https://sonarcloud.io/dashboard?id=valkyrienyanko_ValksBot)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_ValksBot&metric=ncloc)](https://sonarcloud.io/dashboard?id=valkyrienyanko_ValksBot)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_ValksBot&metric=bugs)](https://sonarcloud.io/dashboard?id=valkyrienyanko_ValksBot)
