@@ -1,4 +1,3 @@
-# ValksBot
 [![Quality Gate Status][quality]][quality-url]
 [![Lines of Code][lines]](lines-url)
 [![Bugs][bugs]](bugs-url)
