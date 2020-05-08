@@ -1,11 +1,11 @@
 [![Quality Gate Status][quality]][quality-url]
-[![Lines of Code][lines]](lines-url)
-[![Bugs][bugs]](bugs-url)
-[![GitHub license][license]](license-url)
-[![Issues][issues]](issues-url)
-[![Discord][discord]](discord-url)
-[![GitHub stars][stars]](stars-url)
-[![GitHub forks][forks]](forks-url)
+[![Lines of Code][lines]][lines-url]
+[![Bugs][bugs]][bugs-url]
+[![GitHub license][license]][license-url]
+[![Issues][issues]][issues-url]
+[![Discord][discord]][discord-url]
+[![GitHub stars][stars]][stars-url]
+[![GitHub forks][forks]][forks-url]
 
 <h1>ValksBot</h1>
 Multipurpose modular Discord bot.
@@ -45,7 +45,7 @@ If you have any questions, send me a message over discord at **valk#3277**.
 [issues]: https://img.shields.io/github/issues/valkyrienyanko/ValksBot
 [issues-url]: https://github.com/valkyrienyanko/ValksBot/issues
 [discord]: https://img.shields.io/discord/453710350454620160.svg
-[discord-url]: https://discordapp.com/invite/N9QVxbM
+[discord-url]: https://discord.gg/thMupbv
 [stars]: https://img.shields.io/github/stars/valkyrienyanko/ValksBot?color=brightgreen
 [stars-url]: https://github.com/valkyrienyanko/ValksBot/stargazers
 [forks]: https://img.shields.io/github/forks/valkyrienyanko/ValksBot?color=brightgreen
