@@ -1,22 +1,16 @@
-[![Quality Gate Status][quality]][quality-url]
-[![Lines of Code][lines]][lines-url]
-[![Bugs][bugs]][bugs-url]
-[![GitHub license][license]][license-url]
-[![Issues][issues]][issues-url]
-[![Discord][discord]][discord-url]
-[![GitHub stars][stars]][stars-url]
-[![GitHub forks][forks]][forks-url]
+<div align="center">
+  
+  [![Discord][discord]][discord-url]
+  [![Quality Gate Status][quality]][quality-url]
+  [![Lines of Code][lines]][lines-url]
+  [![Bugs][bugs]][bugs-url]
+  [![GitHub license][license]][license-url]
+  
+</div>
 
-<h1>ValksBot</h1>
-Multipurpose modular Discord bot.
+<p align="center">Multipurpose modular Discord bot.</p>
 
-## Table of Contents
-1. [Install](#install)
-2. [Contributing](#contributing)
-3. [Support](#support)
-
-<h2 align="center">Install</h2>
-
+## Install
 1. Clone `https://github.com/valkyrienyanko/ValksBot.git`
 2. Download and Install `LTS` [Node.js](https://nodejs.org/en/)
 3. Install Yarn `npm i -g yarn`
@@ -26,13 +20,8 @@ Multipurpose modular Discord bot.
 7. Start Server with `yarn dev:server`
 8. Create an Invite Link for the Bot by Grabbing its Token ID and Putting it in the Following URL `https://discordapp.com/api/oauth2/authorize?client_id=ID&scope=bot&permissions=27649`
 
-<h2 align="center">Contributing</h2>
-
+## Contributing
 Read [this](https://github.com/valkyrienyanko/ValksBot/blob/master/.github/CONTRIBUTING.md) if you're interested in contributing.
-
-<h2 align="center">Support</h2>
-
-If you have any questions, send me a message over discord at **valk#3277**.
 
 [quality]: https://sonarcloud.io/api/project_badges/measure?project=valkyrienyanko_ValksBot&metric=alert_status
 [quality-url]: https://sonarcloud.io/dashboard?id=valkyrienyanko_ValksBot
