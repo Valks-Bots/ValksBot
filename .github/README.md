@@ -31,11 +31,5 @@ Read [this](https://github.com/valkyrienyanko/ValksBot/blob/master/.github/CONTR
 [bugs-url]: https://sonarcloud.io/dashboard?id=valkyrienyanko_ValksBot
 [license]: https://img.shields.io/github/license/valkyrienyanko/ValksBot?color=brightgreen
 [license-url]: https://github.com/valkyrienyanko/ValksBot/blob/master/LICENSE
-[issues]: https://img.shields.io/github/issues/valkyrienyanko/ValksBot
-[issues-url]: https://github.com/valkyrienyanko/ValksBot/issues
 [discord]: https://img.shields.io/discord/453710350454620160.svg
 [discord-url]: https://discord.gg/thMupbv
-[stars]: https://img.shields.io/github/stars/valkyrienyanko/ValksBot?color=brightgreen
-[stars-url]: https://github.com/valkyrienyanko/ValksBot/stargazers
-[forks]: https://img.shields.io/github/forks/valkyrienyanko/ValksBot?color=brightgreen
-[forks-url]: https://github.com/valkyrienyanko/ValksBot/network
