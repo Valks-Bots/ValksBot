@@ -1,6 +1,5 @@
 <div align="center">
   
-  [![Discord][discord]][discord-url]
   [![Quality Gate Status][quality]][quality-url]
   [![Lines of Code][lines]][lines-url]
   [![Bugs][bugs]][bugs-url]
@@ -31,5 +30,3 @@ Read [this](https://github.com/valkyrienyanko/ValksBot/blob/master/.github/CONTR
 [bugs-url]: https://sonarcloud.io/dashboard?id=valkyrienyanko_ValksBot
 [license]: https://img.shields.io/github/license/valkyrienyanko/ValksBot?color=brightgreen
 [license-url]: https://github.com/valkyrienyanko/ValksBot/blob/master/LICENSE
-[discord]: https://img.shields.io/discord/453710350454620160.svg
-[discord-url]: https://discord.gg/thMupbv
